@@ -11,15 +11,20 @@ const images = [image1, image2, image3, image4]
 
 function App() {
   const carrossel = useRef()
+  const [width, setWidth] = useState(0)
 
   useEffect(() => {
-    console.log(carrossel.current)
-  })
+    console.log(carrossel.current?.scrollWidth, carrossel.current?.offsetWidth)
+    setWidth(carrossel.current?.scrollWidth - carrossel.current?.offsetWidth)
+  }, [])
   return (
     <div className="App">
 
       <motion.div ref={carrossel} className='carrossel' whileTap={{ cursor: "grabbing"}}>
-        <motion.div className='inner' drag='x'>
+        <motion.div className='inner'
+        drag='x'
+        dragConstraints={{right: 0, left: -width}}
+        >
 
           {images.map(image => (
             <motion.div className='item' key={image}>
