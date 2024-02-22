@@ -24,6 +24,9 @@ function App() {
         <motion.div className='inner'
         drag='x'
         dragConstraints={{right: 0, left: -width}}
+        initial={{ x: 500}}
+        animate={{ x: 0}}
+        transition={{ duration: 1 }}
         >
 
           {images.map(image => (
