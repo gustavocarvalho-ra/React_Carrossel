@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import { motion } from 'framer-motion'
 
@@ -9,11 +10,16 @@ import image4 from './img/4.png'
 const images = [image1, image2, image3, image4]
 
 function App() {
+  const carrossel = useRef()
+
+  useEffect(() => {
+    console.log(carrossel.current)
+  })
   return (
     <div className="App">
 
-      <motion.div className='carrossel1'>
-        <motion.div className='inner'>
+      <motion.div ref={carrossel} className='carrossel' whileTap={{ cursor: "grabbing"}}>
+        <motion.div className='inner' drag='x'>
 
           {images.map(image => (
             <motion.div className='item' key={image}>
